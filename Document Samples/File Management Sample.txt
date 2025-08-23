@@ -1,0 +1,16 @@
+
+Company Records/
+│
+├── Finance/
+│   ├── 2025_Budget.xlsx
+│   ├── 2025_ExpenseReport.xlsx
+│
+├── HR/
+│   ├── Employee_Records/
+│   │   ├── Smith_John.pdf
+│   │   ├── Lewis_Amanda.pdf
+│
+├── Reports/
+│   ├── Weekly/
+│   ├── Monthly/
+│   └── Annual/

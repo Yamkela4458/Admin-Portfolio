@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yamkela Lusithi | Admin Portfolio</title>
+  <meta name="description" content="Administrative portfolio showcasing data entry accuracy, document formatting, file management, and professional communication." />
+  <style>
+    :root{
+      --bg: #0f1220;        
+      --surface: #152e35;      
+      --muted: #8891b5;        
+      --text: #fbb11c;         
+      --brand: #5eead4;        
+      --brand-2: #7aa2ff;      
+      --ok: #4ade80;         
+      --warn: #f59e0b;         
+      --danger: #fb7185;       
+      --ring: rgba(94,234,212,0.35);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(122, 244, 255, 0.15), transparent),
+                  radial-gradient(900px 500px at 90% 10%, rgba(26, 235, 204, 0.1), transparent),
+                  var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--brand)}
+    img{max-width:100%; display:block}
+
+    /* Layout */
+    .container{width:min(1200px, 92vw); margin-inline:auto}
+    header.site{
+      position:sticky; top:0; z-index:50;
+      background: linear-gradient(180deg, rgba(26, 92, 61, 0.95), rgba(15,18,32,0.6));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(136,145,181,0.15);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.3px}
+    .brand .dot{width:10px; height:10px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 0 0 4px rgba(94,234,212,0.15)}
+    .nav a{ text-decoration:none; color:var(--text); opacity:0.9 }
+    .nav .links{display:flex; gap:20px}
+    .nav .links a{padding:8px 12px; border-radius:12px}
+    .nav .links a:hover{background:rgba(122,162,255,0.1)}
+
+    /* Hero */
+    .hero{padding:60px 0 30px}
+    .hero .wrap{display:grid; grid-template-columns: 1.4fr 1fr; gap:30px}
+    @media (max-width: 900px){ .hero .wrap{grid-template-columns:1fr} }
+    .badge{display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(136,145,181,0.25); color:var(--muted); background:rgba(21,25,53,0.6); padding:6px 10px; border-radius:999px; font-size:13px}
+    .title{font-size:clamp(28px, 5vw, 44px); line-height:1.1; margin:14px 0}
+    .subtitle{color:var(--muted); max-width:60ch}
+    .cta{display:flex; gap:12px; margin-top:20px; flex-wrap:wrap}
+    .btn{appearance:none; border:none; cursor:pointer; border-radius:14px; padding:12px 16px; font-weight:600; transition:transform .06s ease, box-shadow .2s ease; box-shadow:var(--shadow)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#0b1023}
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid rgba(136,145,181,0.3)}
+
+    /* KPIs */
+    .kpis{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:30px}
+    @media (max-width: 900px){ .kpis{grid-template-columns: repeat(2, 1fr)} }
+    .kpi{background:linear-gradient(180deg, rgba(21,25,53,0.8), rgba(21,25,53,0.5)); border:1px solid rgba(136,145,181,0.2); border-radius:16px; padding:16px}
+    .kpi .lbl{color:var(--muted); font-size:12px}
+    .kpi .val{font-size:22px; font-weight:800; letter-spacing:0.3px}
+    .progress{height:8px; background:rgba(136,145,181,0.25); border-radius:999px; overflow:hidden; margin-top:8px}
+    .progress > span{display:block; height:100%; background:linear-gradient(90deg, var(--brand), var(--brand-2))}
+
+    /* Section */
+    section{padding:40px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:12px}
+    .section-title{font-size:24px}
+    .section-desc{color:var(--muted); font-size:14px}
+
+    /* Cards grid */
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:16px}
+    .card{grid-column: span 6; background:linear-gradient(180deg, rgba(21,25,53,0.85), rgba(21,25,53,0.6)); border:1px solid rgba(136,145,181,0.2); border-radius:var(--radius); padding:18px; position:relative; overflow:hidden}
+    .card:hover{box-shadow: 0 12px 40px rgba(0,0,0,0.45)}
+    @media (max-width: 900px){ .card{grid-column:span 12} }
+    .tag{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid rgba(136,145,181,0.3); color:var(--muted); margin-right:6px}
+    .card h3{margin:12px 0 8px}
+    .card p{color:var(--muted)}
+
+    /* Tabs */
+    .tabs{display:flex; gap:6px; margin:10px 0 12px}
+    .tab{padding:8px 10px; font-size:13px; border:1px solid rgba(136,145,181,0.25); color:var(--muted); background:transparent; border-radius:10px; cursor:pointer}
+    .tab[aria-selected="true"]{color:#0b1023; background:linear-gradient(135deg, var(--brand), var(--brand-2)); border-color:transparent; font-weight:700}
+    .tabpanel{display:none}
+    .tabpanel.active{display:block}
+
+    /* table styling */
+    pre{background:rgba(9,12,24,0.75); border:1px solid rgba(136,145,181,0.2); padding:14px; border-radius:12px; overflow:auto}
+    table{width:100%; border-collapse:collapse; font-size:14px}
+    th, td{border:1px solid rgba(136,145,181,0.25); padding:8px 10px; text-align:left}
+    th{background:rgba(122,162,255,0.1)}
+
+    /* Certifications */
+    .certs{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid rgba(136,145,181,0.25); background:rgba(21,25,53,0.6); color:var(--muted); font-size:13px}
+    .chip i{width:8px; height:8px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2))}
+
+    /* Contact */
+    form{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    form .full{grid-column:1/-1}
+    input, textarea{width:100%; background:rgba(9,12,24,0.6); border:1px solid rgba(136,145,181,0.25); color:var(--text); border-radius:12px; padding:12px}
+    textarea{min-height:120px}
+
+    /* Footer */
+    footer{padding:24px 0; color:var(--muted); font-size:14px; border-top:1px solid rgba(136,145,181,0.15)}
+
+    
+    .floaty{position:absolute; inset:auto -40px -40px auto; width:180px; height:180px; background:radial-gradient(closest-side, rgba(94,234,212,0.15), transparent); filter: blur(20px); pointer-events:none}
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <div class="brand"><span class="dot"></span> <span>Yamkela Lusithi</span></div>
+      <nav class="links" aria-label="Primary">
+        <a href="#samples">Work Samples</a>
+        <a href="#skills">Skills</a>
+        <a href="#certs">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container wrap">
+        <div>
+          <span class="badge" aria-label="headline">Organized Admin Work and Administrative Assistance</span>
+          <h1 class="title">Accurate input. Clean records. Professional documents.</h1>
+          <p class="subtitle">I specialise in Educational Technology, data entry, document formatting, file organisation, and clear communication for remote teams. This portfolio shows practical, verifiable samples for daily admin tasks.</p>
+          <div class="cta">
+            <a class="btn primary" href="#samples">View Work Samples</a>
+            
+            <a class="btn ghost" href="Document Samples/Yamkela Lusithi - Admin Resume.docx" id="downloadResume" aria-label="Download resume">Download Resume</a>
+          </div>
+
+          <div class="kpis" role="list" aria-label="Key capability metrics">
+            <div class="kpi" role="listitem">
+              <div class="lbl">Typing Speed</div>
+              <div class="val">75 WPM</div>
+              <div class="progress" aria-hidden="true"><span style="width:82%"></span></div>
+            </div>
+            <div class="kpi" role="listitem">
+              <div class="lbl">Data Entry Accuracy</div>
+              <div class="val">99.2%</div>
+              <div class="progress" aria-hidden="true"><span style="width:92%"></span></div>
+            </div>
+            <div class="kpi" role="listitem">
+              <div class="lbl">Turnaround</div>
+              <div class="val">200 Entries/hr</div>
+              <div class="progress" aria-hidden="true"><span style="width:80%"></span></div>
+            </div>
+            <div class="kpi" role="listitem">
+              <div class="lbl">On-time Delivery</div>
+              <div class="val">100%</div>
+              <div class="progress" aria-hidden="true"><span style="width:100%"></span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="min-height:280px">
+            <span class="tag">Remote-ready</span>
+            <span class="tag">Laptop + Stable Internet</span>
+            <h3>Tech Toolkit</h3>
+            <p>Microsoft Office, Google Workspace, Excel and Sheets for data, Word and Docs for formatting, Drive for file control, HTML and CSS for clean web documents.</p>
+            <div class="floaty" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="samples">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Work Samples</h2>
+            <p class="section-desc">Scenarios to showacase accuracy, organisation, and communication skills.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- Data Entry -->
+          <article class="card" aria-labelledby="dataEntryTitle">
+            <span class="tag">Data Entry</span>
+            <span class="tag">Quality Control</span>
+            <h3 id="dataEntryTitle">Cleaned Dataset with Validation</h3>
+            <p>Before and after view of a customer contact list. Normalised names, fixed phone patterns, and validated emails.</p>
+
+            <div class="tabs" role="tablist" aria-label="Data entry views">
+              <button class="tab" role="tab" aria-selected="true" aria-controls="rawTab" id="rawTabBtn">Raw</button>
+              <button class="tab" role="tab" aria-selected="false" aria-controls="cleanTab" id="cleanTabBtn">Clean</button>
+              <a class="tab" role="button" href="Document Samples/Data Entry Sample.xlsx" target="_blank" rel="noopener" title="Download sample spreadsheet">Download</a>
+            </div>
+
+            <div id="rawTab" class="tabpanel active" role="tabpanel" aria-labelledby="rawTabBtn">
+              <table aria-label="Raw dataset">
+                <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>City</th></tr></thead>
+                <tbody>
+                  <tr><td>john.s</td><td>0731112233</td><td>j.smith@gmail</td><td>JHB</td></tr>
+                  <tr><td>AMANDA L</td><td>071 555 9900</td><td>amandal@email.com</td><td>Cape Town</td></tr>
+                  <tr><td>PETER</td><td>083-789-4561</td><td>peters.gmail.com</td><td>Durban</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="cleanTab" class="tabpanel" role="tabpanel" aria-labelledby="cleanTabBtn">
+              <table aria-label="Clean dataset">
+                <thead><tr><th>Full Name</th><th>Phone Number</th><th>Email Address</th><th>City</th></tr></thead>
+                <tbody>
+                  <tr><td>John Smith</td><td>073 111 2233</td><td>j.smith@gmail.com</td><td>Johannesburg</td></tr>
+                  <tr><td>Amanda Lewis</td><td>071 555 9900</td><td>amanda.l@email.com</td><td>Cape Town</td></tr>
+                  <tr><td>Peter Jacobs</td><td>083 789 4561</td><td>peters@gmail.com</td><td>Durban</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- Document Formatting -->
+          <article class="card" aria-labelledby="docTitle">
+            <span class="tag">Document Formatting</span>
+            <span class="tag">Reports</span>
+            <h3 id="docTitle">Styled Weekly Report with TOC</h3>
+            <p>Structured document with headings, table of contents, and a summary table for regional performance.</p>
+            <div class="tabs" role="tablist" aria-label="Document links">
+              <a class="tab" role="button" href="Document Samples/Document Formatting Sample.pdf" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+            <table aria-label="Summary table preview">
+              <thead><tr><th>Region</th><th>Sales (July)</th><th>Sales (Aug)</th><th>Change</th></tr></thead>
+              <tbody>
+                <tr><td>Gauteng</td><td>R100,000</td><td>R110,000</td><td><span style="color:var(--ok); font-weight:700">+10%</span></td></tr>
+                <tr><td>Western Cape</td><td>R80,000</td><td>R76,000</td><td><span style="color:var(--danger); font-weight:700">-5%</span></td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- File Managagement -->
+          <article class="card" aria-labelledby="filesTitle">
+            <span class="tag">File Management</span>
+            <span class="tag">Naming Standards</span>
+            <h3 id="filesTitle">Organised Digital Folder Structure</h3>
+            <p>Logical folder hierarchy with clear naming for finance, HR, and reporting schedules.</p>
+            <div class="tabs" role="tablist" aria-label="File structure links">
+              <a class="tab" role="button" href="Document Samples/File Management Sample.txt" target="_blank" rel="noopener">View Text</a>
+            </div>
+<pre aria-label="Folder tree preview">Company Records/
+│
+├── Finance/
+│   ├── 2025_Budget.xlsx
+│   ├── 2025_ExpenseReport.xlsx
+│
+├── HR/
+│   ├── Employee_Records/
+│   │   ├── Smith_John.pdf
+│   │   ├── Lewis_Amanda.pdf
+│
+├── Reports/
+│   ├── Weekly/
+│   ├── Monthly/
+│   └── Annual/</pre>
+          </article>
+
+          <!-- Email -->
+          <article class="card" aria-labelledby="emailTitle">
+            <span class="tag">Professional Email</span>
+            <span class="tag">Client-ready</span>
+            <h3 id="emailTitle">Weekly Data Report Submission</h3>
+            <p>Concise and polite memo with bullet notes and clear ask for confirmation.</p>
+            <div class="tabs" role="tablist" aria-label="Email links">
+              <a class="tab" role="button" href="Document Samples/Email Memo Sample.docx" target="_blank" rel="noopener">Download DOCX</a>
+            </div>
+            <div aria-label="Email preview" style="background:rgba(9,12,24,0.6); border:1px solid rgba(136,145,181,0.25); border-radius:12px; padding:12px">
+              <div style="font-weight:700">Subject: Weekly Data Report Submission, August 2025</div>
+              <div style="margin-top:8px">Dear [Manager’s Name],</div>
+              <ul>
+                <li>Data verified for accuracy and formatted to standard.</li>
+                <li>Gauteng shows a 10% increase.</li>
+                <li>Western Cape requires review.</li>
+              </ul>
+              <div>Kindly confirm receipt.</div>
+              <div style="margin-top:8px">Kind regards,</div>
+              <div>Yamkela Lusithi</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Skills and Tools</h2>
+            <p class="section-desc">Focused on accuracy, structure, and reliable delivery.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card"><span class="tag">Excel and Sheets</span><h3>Data tables and validation</h3><p>Sorting, filtering, text to columns, find and replace, validation rules, basic formulas, conditional formatting.</p></div>
+          <div class="card"><span class="tag">Word and Docs</span><h3>Styles and templates</h3><p>Headings, table of contents, headers and footers, tables, page layout, export to PDF.</p></div>
+          <div class="card"><span class="tag">Drive and Cloud</span><h3>File governance</h3><p>Folder structure setup, naming conventions, access control, versioning, and backups.</p></div>
+          <div class="card"><span class="tag">Communication</span><h3>Clear messages</h3><p>Action oriented emails, concise summaries, professional tone, and follow ups.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certs">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Certifications and Education</h2>
+            <p class="section-desc">Training that supports precise admin delivery.</p>
+          </div>
+        </div>
+        <div class="certs">
+          <span class="chip"><i></i> EduCourse Office Administration, Introduction</span>
+          <span class="chip"><i></i> FNB App Academy, Full Stack Development</span>
+          <span class="chip"><i></i> B.Ed Hons, UJ, in progress - Part Time</span>
+          <span class="chip"><i></i> B.Ed FP, WSU</span>
+        </div>
+      </div>
+    </section>
+
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Contact</h2>
+        <p class="section-desc">Reach out via email or connect on social media.</p>
+      </div>
+    </div>
+    <p><img src="images/newgmaillogo.webp" width="100"> <a href="mailto:lusithiyamkela@gmail.com">Email</a></p>
+    <p><img src="images/LinkedIn_logo_initials.png.webp" width="100"> <a href="https://www.linkedin.com/in/yamkela-lusithi" target="_blank" rel="noopener">linkedIn</a></p>
+    <p><img src="images/Tiktok_icon.svg.png" width="100"> <a href="https://www.tiktok.com/@yamkela_lusithi" target="_blank" rel="noopener"> Tik Tok</a></p>
+    <p><img src="images/Instagram_logo_2022.svg.webp" width="100"> <a href="https://www.instagram.com/yamkela.lusithi/" target="_blank" rel="noopener">Instagram</a></p>
+  </div>
+</section>
+
+  </main>
+
+
+  <section id="about" style="padding:40px 0;">
+  <div class="container" style="display:flex; flex-wrap:wrap; align-items:center; gap:30px;">
+    
+    <!-- Picture -->
+    <div style="flex:1 1 250px; text-align:center;">
+      <img src="images/IMG_7533.jpg" alt="Yamkela Lusithi" 
+           style="width:200px; height:200px; object-fit:cover; border-radius:50%; border:4px solid var(--brand); box-shadow:0 8px 20px rgba(0,0,0,0.35);">
+    </div>
+    
+    <!-- Bio + Contact -->
+    <div style="flex:2 1 400px;">
+      <h2 style="font-size:28px; margin-bottom:12px;">About Me</h2>
+      <p style="color:var(--muted); margin-bottom:16px;">
+        I am an education enthusiast and tech-savvy problem solver, blending my B.Ed Honours studies in Languages, 
+        Literacy & Literature with hands-on experience in web development and digital organisation. I thrive on turning
+         complex information into clear, structured systems, whether that’s designing interactive learning websites, 
+         managing data efficiently, or creating polished documents and workflows. My background in teaching, research, 
+         and technology allows me to approach administrative tasks with creativity, precision, and a strong eye for 
+         detail, ensuring every project I handle is organised, accurate, and impactful.
+      </p>
+    </div>
+    
+  </div>
+</section>
+
+
+  <footer>
+    <div class="container">© <span id="year"></span> Created by Yamkela Lusithi</div>
+  </footer>
+
+  <script>
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Data Entry
+    const rawBtn = document.getElementById('rawTabBtn');
+    const cleanBtn = document.getElementById('cleanTabBtn');
+    const rawTab = document.getElementById('rawTab');
+    const cleanTab = document.getElementById('cleanTab');
+
+    function activate(btnOn, btnOff, tabOn, tabOff){
+      btnOn.setAttribute('aria-selected', 'true');
+      btnOff.setAttribute('aria-selected', 'false');
+      tabOn.classList.add('active');
+      tabOff.classList.remove('active');
+    }
+    rawBtn.addEventListener('click', () => activate(rawBtn, cleanBtn, rawTab, cleanTab));
+    cleanBtn.addEventListener('click', () => activate(cleanBtn, rawBtn, cleanTab, rawTab));
+
+
+  </script>
+</body>
+</html>
+
